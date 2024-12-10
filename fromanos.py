@@ -8,19 +8,54 @@ roman_numbers= {
     "I": 1,   
 }
 
-def a_romanos(value:int)-> str:
+def aa_romanos(value:int)-> str:
+    """
+    Convierte el valor introducido en números romanos
+    """
     roman = ""
     for clave, num in roman_numbers.items():
         if num == value:
             roman = clave
-        elif value == num * (value / num):
-            for _ in range (num ** (value / num)):
-                roman += clave 
+            break
+
+        elif value == num * (value // num):
+            for _ in range (value // num):
+                roman += clave
 
     return roman
 
-assert a_romanos(1) == "I"
-assert a_romanos(500) == "D"
+"""
+lista_traducciones = []
+-Para cada posición, cifra de int, de atras a delante
+    -valor = descomponer(posición,cifra)
+    -valor_traducido = traducir(valor)
+    -añadir valor_traducido a  lista_traducciones
 
-assert a_romanos(20) == "XX","numero incorrecro"
-assert a_romanos(200) == "CC","numero incorrecro"
+-lista_traducciones_ordenada = darle la vuelta a lista_traducciones
+-concatenar lista_traducciones
+"""
+def descomponer(posición:int,cifra:str)->int:
+    return int(cifra) * 10 ** posición
+
+def traducir(valor:int)-> str:
+    pass
+
+def a_romanos(number:int)->str:
+    lista_traducciones = []
+    number_str = str(number)
+    reves = number_str[::-1]
+    
+
+    for posición, cifra in enumerate(reves):
+        valor = descomponer(posición,cifra)
+        valor_traducido = traducir(valor)
+        lista_traducciones.append(valor_traducido)
+
+    lista_traducciones_inversa = lista_traducciones.reverse()
+    num_romano = ""
+    for simbolo in lista_traducciones_inversa:
+        num_romano += simbolo
+
+    return num_romano
+
+
