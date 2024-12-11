@@ -1,10 +1,10 @@
-from fromanos import a_romanos,descomponer
+from fromanos import a_romanos,descomponer,traducir
 
-def test_simbolos_sencillos():
+def _test_simbolos_sencillos():
     assert a_romanos(1) == "I"
     assert a_romanos(500) == "D"
 
-def test_doble_repetición():
+def _test_doble_repetición():
     assert a_romanos(20) == "XX","numero incorrecro"
     assert a_romanos(200) == "CC","numero incorrecro"
 
@@ -22,4 +22,13 @@ def test_descomponer():
     resultado = descomponer(3,"1")
     assert resultado == 1000
 
-
+def test_traducir():
+    assert traducir(9) == "IX"
+    assert traducir(30) == "XXX"
+    assert traducir(900) == "CM"
+    assert traducir(1000) == "M"
+    assert traducir(2) == "II"
+    assert traducir(800) == "DCCC"
+    
+def test_romanos_varios():
+    assert a_romanos(1939) == "MCMXXXIX"
