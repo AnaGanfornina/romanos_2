@@ -29,4 +29,23 @@ def a_romanos(number:int)->str:
 
     return num_romano
 
+def traduce_entero(simbolo:str)-> int:
+    pass
+
+def a_numeros(simbolo:str)-> str:
+    """
+    Traduce numeros romanos a numeros enteros
+    """
+    total = 0
+    num_prev = 0
+    for item in simbolo:
+        valor = traduce_entero(simbolo)
+        if num_prev >= valor or num_prev == 0:
+            total += valor
+        else:
+            otro_valor = valor - num_prev * 2
+            total += otro_valor
+            num_prev = valor
+    
+    return total
 

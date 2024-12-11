@@ -1,4 +1,4 @@
-from fromanos import a_romanos,descomponer,traducir
+from fromanos import a_romanos,descomponer,traducir,a_numeros
 
 def _test_simbolos_sencillos():
     assert a_romanos(1) == "I"
@@ -32,3 +32,6 @@ def test_traducir():
     
 def test_romanos_varios():
     assert a_romanos(1939) == "MCMXXXIX"
+
+def test_a_numeros():
+    assert a_numeros("MMMCMXCIX") == 3999
