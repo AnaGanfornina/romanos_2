@@ -1,4 +1,4 @@
-from fromanos import a_romanos,descomponer,traducir,a_numeros
+from fromanos import a_romanos,descomponer,traducir,a_numeros,traduce_entero
 
 def _test_simbolos_sencillos():
     assert a_romanos(1) == "I"
@@ -35,3 +35,11 @@ def test_romanos_varios():
 
 def test_a_numeros():
     assert a_numeros("MMMCMXCIX") == 3999
+
+def test_traduce_entero():
+    assert traduce_entero("IX") == 9
+    assert traduce_entero("XXX") == 30
+    assert traduce_entero("CM") == 900
+    assert traduce_entero("M") == 1000
+    assert traduce_entero("II") == 2
+    assert traduce_entero("DCCC") == 800
