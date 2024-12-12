@@ -80,6 +80,35 @@ def a_numeros(simbolo:str)-> str:
     
     return total
 
+def esta_en_racha(haystack,neddle:str,racha:int)->bool:
+    cont = 0
+    if len(haystack) >= racha:
+        for el in haystack:
+            if el == neddle:
+                cont += 1
+                if cont == racha:
+                    break
+            else:
+                cont = 0
+    else:
+        cont = 0
+    return cont == racha
+
+def valida_repeticiones(num_roman:str)->bool:
+    """
+    Predicado que comprueba que I, X, C, M  no se repitan más de 3 veces
+    al igual que V, L, D 
+    """
+    no_repeat = "IXCM"
+    en_racha = True
+    for caracter in no_repeat:
+        if esta_en_racha(num_roman, caracter, 4):
+            en_racha = False
+            break
+            
+    return en_racha  
+    
+
 def program():
     user_answer = input("Introduzca el número a traducir: ")
     result = 0

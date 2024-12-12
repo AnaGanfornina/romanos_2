@@ -1,4 +1,4 @@
-from fromanos import a_romanos,descomponer,traducir,a_numeros,traduce_entero,is_valid,RomanNumberError
+from fromanos import a_romanos,descomponer,traducir,a_numeros,traduce_entero,is_valid,RomanNumberError,valida_repeticiones
 import pytest
 
 def _test_simbolos_sencillos():
@@ -65,3 +65,17 @@ def test_num_validar_caractereres_romanos():
         a_numeros("ZTW")
     
     assert str(contexto.value).endswith("no es un simbolo romano") 
+
+
+def test_validar_no_repeticiones_de_1_o_3():
+    """
+    I, X, C, M hasta 3 veces
+    V, L, D no se pueden repetir
+    """
+    assert not valida_repeticiones("IIII")
+    assert not valida_repeticiones("XXXX")
+    assert not valida_repeticiones("CCCC")
+    assert not valida_repeticiones("MMMM")
+
+    assert valida_repeticiones("XI")
+     
