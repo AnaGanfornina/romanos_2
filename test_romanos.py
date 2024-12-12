@@ -1,4 +1,4 @@
-from fromanos import a_romanos,descomponer,traducir,a_numeros,traduce_entero,is_valid
+from fromanos import a_romanos,descomponer,traducir,a_numeros,traduce_entero,is_valid,RomanNumberError
 import pytest
 
 def _test_simbolos_sencillos():
@@ -61,7 +61,7 @@ def test_is_valid():
     assert is_valid("III")
 
 def test_num_validar_caractereres_romanos():
-    with pytest.raises(ValueError) as contexto:
+    with pytest.raises(RomanNumberError) as contexto:
         a_numeros("ZTW")
     
     assert str(contexto.value).endswith("no es un simbolo romano") 

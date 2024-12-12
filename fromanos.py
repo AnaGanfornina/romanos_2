@@ -1,3 +1,6 @@
+class RomanNumberError(Exception):
+    pass
+
 def descomponer(posición:int,cifra:str)->int:
     return int(cifra) * 10 ** posición
 
@@ -65,7 +68,7 @@ def a_numeros(simbolo:str)-> str:
         valor = traduce_entero(signo)
         
         if valor == 0:
-            raise ValueError(f"{signo} no es un simbolo romano") #esto estaría bien pasarlo a una función
+            raise RomanNumberError(f"{signo} no es un simbolo romano") #esto estaría bien pasarlo a una función
         
         if num_prev >= valor or num_prev == 0:
             total += valor
