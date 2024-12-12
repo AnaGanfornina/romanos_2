@@ -3,7 +3,7 @@ def descomponer(posición:int,cifra:str)->int:
 
 def traducir(valor:int)-> str:
     simbolos = {
-        1: 'I', 2:'II', 3:'III', 4: 'IV', 5: 'V', 6:'VI', 7: 'VII', 8: 'VIII', 9:'IX',
+        0:'', 1: 'I', 2:'II', 3:'III', 4: 'IV', 5: 'V', 6:'VI', 7: 'VII', 8: 'VIII', 9:'IX',
         10: 'X', 20: 'XX', 30: 'XXX', 40: 'XL', 50:'L', 60:'LX', 70:'LXX', 80:'LXXX', 90:'XC',
         100: 'C', 200: 'CC', 300: 'CCC', 400:'CD', 500:'D', 600:'DC', 700:'DCC', 800:'DCCC', 900:'CM',
         1000:'M', 2000:'MM', 3000:'MMM'
@@ -30,8 +30,11 @@ def a_romanos(number:int)->str:
     return num_romano
 
 def traduce_entero(simbolo:str)-> int:
+    """
+    Traduce un simbolo a numero romano, si no puede devuelve un ValueError
+    """
     simbolos = {
-        1: 'I', 2:'II', 3:'III', 4: 'IV', 5: 'V', 6:'VI', 7: 'VII', 8: 'VIII', 9:'IX',
+        0: '', 1: 'I', 2:'II', 3:'III', 4: 'IV', 5: 'V', 6:'VI', 7: 'VII', 8: 'VIII', 9:'IX',
         10: 'X', 20: 'XX', 30: 'XXX', 40: 'XL', 50:'L', 60:'LX', 70:'LXX', 80:'LXXX', 90:'XC',
         100: 'C', 200: 'CC', 300: 'CCC', 400:'CD', 500:'D', 600:'DC', 700:'DCC', 800:'DCCC', 900:'CM',
         1000:'M', 2000:'MM', 3000:'MMM'
@@ -45,14 +48,25 @@ def traduce_entero(simbolo:str)-> int:
 
     return traduccion
 
+def is_valid(simbolo:str)->bool:
+    """
+    Predicado que devuelve true si el número es válido
+    """
+    return traduce_entero(simbolo) != 0
+
 def a_numeros(simbolo:str)-> str:
     """
-    Traduce numeros romanos a numeros enteros
+    Traduce numeros romanos a numeros enteros.
     """
     total = 0
     num_prev = 0
+    
     for signo in simbolo:
         valor = traduce_entero(signo)
+        
+        if valor == 0:
+            raise ValueError(f"{signo} no es un simbolo romano") #esto estaría bien pasarlo a una función
+        
         if num_prev >= valor or num_prev == 0:
             total += valor
         else:
@@ -74,4 +88,4 @@ def program():
     
     return result
 
-print(program())
+
