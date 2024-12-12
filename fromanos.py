@@ -63,4 +63,15 @@ def a_numeros(simbolo:str)-> str:
     
     return total
 
-assert a_numeros("MMMCMXCIX") == 3999
+def program():
+    user_answer = input("Introduzca el número a traducir: ")
+    result = 0
+    try: 
+        int(user_answer)
+        result = a_romanos(int(user_answer)) #esto es probable hacerlo con un try except
+    except ValueError:
+        result = a_numeros(user_answer)
+    
+    return result
+
+print(program())
