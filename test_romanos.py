@@ -101,4 +101,9 @@ def test_valdar_romano_sin_repeticiones():
         a_numeros("MCCVV")
     assert str(ctx_error.value) == "V, no puede repetirse"
 
-   
+def test_restas_incorrectas():
+    with pytest.raises(RomanNumberError):
+        a_numeros("IC")
+    with pytest.raises(RomanNumberError):
+        a_numeros("VX")
+    

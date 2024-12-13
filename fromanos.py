@@ -61,14 +61,14 @@ def a_numeros(simbolo:str)-> str:
     """
     Traduce numeros romanos a numeros enteros.
     """
+    total = 0
+    num_prev = 1001
+    restas_validas = ((1,5),(1,10),(10,50),(10,100),(100,500),(100,1000))
+
     valida,char,limit = valida_repeticiones(simbolo)
     if not valida:
         raise RomanNumberError(f"{char}, {'solo' if limit == 4 else 'no'} puede repetirse{' tres veces' if limit == 4 else ''}")
         
-
-    total = 0
-    num_prev = 0
-    
     for signo in simbolo:
         valor = traduce_entero(signo)
         
@@ -78,8 +78,11 @@ def a_numeros(simbolo:str)-> str:
         if num_prev >= valor or num_prev == 0:
             total += valor
         else:
-            otro_valor = valor - num_prev * 2
-            total += otro_valor
+            if (num_prev,valor) in restas_validas:
+                otro_valor = valor - num_prev * 2
+                total += otro_valor
+            else:
+                raise RomanNumberError("f{num_prev},{valor} resta no permitida")
             
         num_prev = valor
     
