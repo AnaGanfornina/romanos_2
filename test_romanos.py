@@ -67,15 +67,38 @@ def test_num_validar_caractereres_romanos():
     assert str(contexto.value).endswith("no es un simbolo romano") 
 
 
-def test_validar_no_repeticiones_de_1_o_3():
+def test_validar_no_repeticiones_de_3():
     """
-    I, X, C, M hasta 3 veces
+    
     V, L, D no se pueden repetir
     """
-    assert not valida_repeticiones("IIII")
-    assert not valida_repeticiones("XXXX")
-    assert not valida_repeticiones("CCCC")
-    assert not valida_repeticiones("MMMM")
+    assert valida_repeticiones("IIIII") == (False, "I",4)
+    assert valida_repeticiones ("XXXX") ==(False, "X",4)
+    assert valida_repeticiones ("CCCC") == (False, "C",4)
+    assert valida_repeticiones ("MMMM") == (False, "M",4)
 
-    assert valida_repeticiones("XI")
+def test_validar_no_repeticiones_de_2():
+    """
+    V, L, D no se pueden repetir
+    """
+    assert valida_repeticiones("VV") == (False, "V",2)
+    assert valida_repeticiones ("LL") ==(False, "L",2)
+    assert valida_repeticiones ("DD") == (False, "D",2)
+
+
+def test_valdar_romano_cuatro_repeticiones():
+    with pytest.raises(RomanNumberError) as contexto:
+        a_numeros("MCCCCXXII")
+    assert str(contexto.value) == "C, solo puede repetirse tres veces"
+
+    with pytest.raises(RomanNumberError) as contexto:
+        a_numeros("MMMMCXXII")
+    assert str(contexto.value) == "M, solo puede repetirse tres veces"
      
+
+def test_valdar_romano_sin_repeticiones():
+    with pytest.raises(RomanNumberError) as ctx_error:
+        a_numeros("MCCVV")
+    assert str(ctx_error.value) == "V, no puede repetirse"
+
+   

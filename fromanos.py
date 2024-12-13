@@ -61,6 +61,11 @@ def a_numeros(simbolo:str)-> str:
     """
     Traduce numeros romanos a numeros enteros.
     """
+    valida,char,limit = valida_repeticiones(simbolo)
+    if not valida:
+        raise RomanNumberError(f"{char}, {'solo' if limit == 4 else 'no'} puede repetirse{' tres veces' if limit == 4 else ''}")
+        
+
     total = 0
     num_prev = 0
     
@@ -81,6 +86,9 @@ def a_numeros(simbolo:str)-> str:
     return total
 
 def esta_en_racha(haystack,neddle:str,racha:int)->bool:
+    """
+    Devuelve True si la aguja esta en una racha del número indicado
+    """
     cont = 0
     if len(haystack) >= racha:
         for el in haystack:
@@ -97,16 +105,17 @@ def esta_en_racha(haystack,neddle:str,racha:int)->bool:
 def valida_repeticiones(num_roman:str)->bool:
     """
     Predicado que comprueba que I, X, C, M  no se repitan más de 3 veces
-    al igual que V, L, D 
+    y que  V, L, D  no se repitan mas de dos
     """
-    no_repeat = "IXCM"
+    no_repeat = [("I",4),("X",4),("C",4),("M",4),
+                 ("V",2),("L",2),("D",2)]
     en_racha = True
-    for caracter in no_repeat:
-        if esta_en_racha(num_roman, caracter, 4):
+    for caracter, limit in no_repeat:
+        if esta_en_racha(num_roman, caracter, limit):
             en_racha = False
             break
             
-    return en_racha  
+    return en_racha,caracter,limit
     
 
 def program():
