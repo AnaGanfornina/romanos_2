@@ -1,3 +1,5 @@
+
+
 class RomanNumberError(Exception):
     pass
 
@@ -57,13 +59,32 @@ def is_valid(simbolo:str)->bool:
     """
     return traduce_entero(simbolo) != 0
 
+def puede_restar(lista_restas:list, resta:int)->bool:
+    """
+    Predicado que devuelve True si ve que puede restar comparandolo 
+    con la lista de restas
+    """
+    try:
+        ultima_resta = str(lista_restas[-1])
+    except IndexError:
+        return True
+    
+    resta_acutal = str(resta)
+    result = True
+    if len(ultima_resta) <= len(resta_acutal):
+        result = False
+    return result
+
 def a_numeros(simbolo:str)-> str:
     """
     Traduce numeros romanos a numeros enteros.
     """
     total = 0
     num_prev = 1001
+    substract = lambda x:x - (2 * num_prev)
     restas_validas = ((1,5),(1,10),(10,50),(10,100),(100,500),(100,1000))
+    restas_realizadas = []
+    ha_restado = False
 
     valida,char,limit = valida_repeticiones(simbolo)
     if not valida:
@@ -75,14 +96,20 @@ def a_numeros(simbolo:str)-> str:
         if valor == 0:
             raise RomanNumberError(f"{signo} no es un simbolo romano") #esto estaría bien pasarlo a una función
         
-        if num_prev >= valor or num_prev == 0:
-            total += valor
-        else:
+        if valor > num_prev and not ha_restado:
             if (num_prev,valor) in restas_validas:
-                otro_valor = valor - num_prev * 2
-                total += otro_valor
+                candidata_resta = valor - num_prev
+                if not puede_restar(restas_realizadas, candidata_resta):
+                    raise RomanNumberError("No se permiten restas duplicasas")
+                
+                restas_realizadas.append(candidata_resta)
+                total = substract(valor)
+                ha_restado = True
             else:
                 raise RomanNumberError("f{num_prev},{valor} resta no permitida")
+        else:
+            total += valor
+            ha_restado = False 
             
         num_prev = valor
     
