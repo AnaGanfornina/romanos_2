@@ -75,6 +75,14 @@ def puede_restar(lista_restas:list, resta:int)->bool:
         result = False
     return result
 
+def puede_sumar(valor:int,last:int)->bool:
+    """
+    Predicado que devuelve true si la longitud de valor es menor
+    que la longitud de last
+    """
+    return len(str(valor)) < len(str(last))
+
+
 def a_numeros(simbolo:str)-> str:
     """
     Traduce numeros romanos a numeros enteros.
@@ -85,6 +93,7 @@ def a_numeros(simbolo:str)-> str:
     restas_validas = ((1,5),(1,10),(10,50),(10,100),(100,500),(100,1000))
     restas_realizadas = []
     ha_restado = False
+    ultima_resta = 0
 
     valida,char,limit = valida_repeticiones(simbolo)
     if not valida:
@@ -94,22 +103,35 @@ def a_numeros(simbolo:str)-> str:
         valor = traduce_entero(signo)
         
         if valor == 0:
-            raise RomanNumberError(f"{signo} no es un simbolo romano") #esto estaría bien pasarlo a una función
+            raise RomanNumberError(f"{signo} no es un simbolo romano") 
         
-        if valor > num_prev and not ha_restado:
+
+        if valor > num_prev:
+            if ha_restado:
+                raise RomanNumberError("Restas anidadas")
+
             if (num_prev,valor) in restas_validas:
-                candidata_resta = valor - num_prev
-                if not puede_restar(restas_realizadas, candidata_resta):
+                ultima_resta = valor - num_prev
+                """
+                if not puede_restar(restas_realizadas, ultima_resta):
                     raise RomanNumberError("No se permiten restas duplicasas")
                 
-                restas_realizadas.append(candidata_resta)
-                total = substract(valor)
+                restas_realizadas.append(ultima_resta)
+                """
+                total += substract(valor)
                 ha_restado = True
             else:
                 raise RomanNumberError("f{num_prev},{valor} resta no permitida")
         else:
-            total += valor
-            ha_restado = False 
+            if ha_restado:
+                if puede_sumar(valor,ultima_resta):
+                    total += valor
+                    ha_restado = False 
+                else:
+                    raise RomanNumberError("Suma  después de resta no permitida")
+                
+            else:
+                total += valor
             
         num_prev = valor
     

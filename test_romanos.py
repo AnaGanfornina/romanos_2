@@ -107,3 +107,22 @@ def test_restas_incorrectas():
     with pytest.raises(RomanNumberError):
         a_numeros("VX")
     
+def test_no_restas_repetidas():
+    with pytest.raises(RomanNumberError):
+        a_numeros("XCXC")
+def test_no_restas_repetidas_del_mimso_grupo_valor():
+    with pytest.raises(RomanNumberError):
+        a_numeros("XCXL")
+    
+
+def test_no_sumar_mismo_grupo_despues_de_resta():
+    with pytest.raises(RomanNumberError):
+        a_numeros("XCXXXIII")
+
+def test_no_sumar_mismo_grupo_distinto_valor():
+    with pytest.raises(RomanNumberError):
+        a_numeros("XCL")
+
+def test_no_restas_contrapeadas():
+    with pytest.raises(RomanNumberError):
+        a_numeros("IXC")
