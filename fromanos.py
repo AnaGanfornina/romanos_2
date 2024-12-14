@@ -100,16 +100,27 @@ def a_numeros(simbolo:str)-> str:
         raise RomanNumberError(f"{char}, {'solo' if limit == 4 else 'no'} puede repetirse{' tres veces' if limit == 4 else ''}")
         
     for signo in simbolo:
+        #El signo existe en el numero romano(simbolo)
         valor = traduce_entero(signo)
         
         if valor == 0:
             raise RomanNumberError(f"{signo} no es un simbolo romano") 
         
-
-        if valor > num_prev:
-            if ha_restado:
-                raise RomanNumberError("Restas anidadas")
-
+        if ha_restado and valor > num_prev:
+            #Resta contrapeda
+            raise RomanNumberError("Restas anidadas")
+        
+        elif ha_restado:
+            #Suma inmediatamente posterior a una resta
+            if puede_sumar(valor,ultima_resta):
+                        total += valor
+                        ha_restado = False 
+                        
+            else:
+                raise RomanNumberError("Suma  después de resta no permitida")
+                
+        elif valor > num_prev: 
+            #Resta normal      
             if (num_prev,valor) in restas_validas:
                 ultima_resta = valor - num_prev
                 """
@@ -121,18 +132,11 @@ def a_numeros(simbolo:str)-> str:
                 total += substract(valor)
                 ha_restado = True
             else:
-                raise RomanNumberError("f{num_prev},{valor} resta no permitida")
+                raise RomanNumberError("f{num_prev},{valor} resta no permitida") 
         else:
-            if ha_restado:
-                if puede_sumar(valor,ultima_resta):
-                    total += valor
-                    ha_restado = False 
-                else:
-                    raise RomanNumberError("Suma  después de resta no permitida")
+            #Suma normal
+            total += valor
                 
-            else:
-                total += valor
-            
         num_prev = valor
     
     return total
