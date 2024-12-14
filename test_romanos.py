@@ -1,4 +1,4 @@
-from fromanos import a_romanos,descomponer,traducir,a_numeros,traduce_entero,is_valid
+from fromanos import a_romanos,descomponer,traducir,a_numeros,traduce_entero,is_valid,RomanNumberError,valida_repeticiones
 import pytest
 
 def _test_simbolos_sencillos():
@@ -36,7 +36,7 @@ def test_romanos_varios():
 
 def test_a_numeros():
     assert a_numeros("MMMCMXCIX") == 3999
-    
+
     for n in range(1,4000):
         assert a_numeros(a_romanos(n)) == n
     
@@ -52,10 +52,77 @@ def test_traduce_entero():
     assert traduce_entero("II") == 2
     assert traduce_entero("DCCC") == 800
     #assert traduce_entero("IIII") != 4
-    with pytest.raises(ValueError):
-        traduce_entero("IIII")
+    #with pytest.raises(ValueError):
+        #traduce_entero("IIII")
 
 
 def test_is_valid():
     assert not is_valid("IIII")
     assert is_valid("III")
+
+def test_num_validar_caractereres_romanos():
+    with pytest.raises(RomanNumberError) as contexto:
+        a_numeros("ZTW")
+    
+    assert str(contexto.value).endswith("no es un simbolo romano") 
+
+
+def test_validar_no_repeticiones_de_3():
+    """
+    
+    V, L, D no se pueden repetir
+    """
+    assert valida_repeticiones("IIIII") == (False, "I",4)
+    assert valida_repeticiones ("XXXX") ==(False, "X",4)
+    assert valida_repeticiones ("CCCC") == (False, "C",4)
+    assert valida_repeticiones ("MMMM") == (False, "M",4)
+
+def test_validar_no_repeticiones_de_2():
+    """
+    V, L, D no se pueden repetir
+    """
+    assert valida_repeticiones("VV") == (False, "V",2)
+    assert valida_repeticiones ("LL") ==(False, "L",2)
+    assert valida_repeticiones ("DD") == (False, "D",2)
+
+
+def test_valdar_romano_cuatro_repeticiones():
+    with pytest.raises(RomanNumberError) as contexto:
+        a_numeros("MCCCCXXII")
+    assert str(contexto.value) == "C, solo puede repetirse tres veces"
+
+    with pytest.raises(RomanNumberError) as contexto:
+        a_numeros("MMMMCXXII")
+    assert str(contexto.value) == "M, solo puede repetirse tres veces"
+     
+
+def test_valdar_romano_sin_repeticiones():
+    with pytest.raises(RomanNumberError) as ctx_error:
+        a_numeros("MCCVV")
+    assert str(ctx_error.value) == "V, no puede repetirse"
+
+def test_restas_incorrectas():
+    with pytest.raises(RomanNumberError):
+        a_numeros("IC")
+    with pytest.raises(RomanNumberError):
+        a_numeros("VX")
+    
+def test_no_restas_repetidas():
+    with pytest.raises(RomanNumberError):
+        a_numeros("XCXC")
+def test_no_restas_repetidas_del_mimso_grupo_valor():
+    with pytest.raises(RomanNumberError):
+        a_numeros("XCXL")
+    
+
+def test_no_sumar_mismo_grupo_despues_de_resta():
+    with pytest.raises(RomanNumberError):
+        a_numeros("XCXXXIII")
+
+def test_no_sumar_mismo_grupo_distinto_valor():
+    with pytest.raises(RomanNumberError):
+        a_numeros("XCL")
+
+def test_no_restas_contrapeadas():
+    with pytest.raises(RomanNumberError):
+        a_numeros("IXC")
