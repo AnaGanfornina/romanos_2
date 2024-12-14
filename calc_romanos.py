@@ -1,3 +1,4 @@
+
 def imprime_operadores():
     """
     Imprime las posibles operaciones matematicas por pantalla
@@ -26,8 +27,24 @@ def ask_operation()->str:
 
 
 
-def calculatum():
-    user = ask_operation()
+def calculatum()-> int:
+    result = 0
+    calculation = int(ask_operation())
+    first_number = input("Primer número:")
+    second_number = input("Segundo número:")
+
+    if calculation == 0:
+        result = first_number + second_number
+    elif calculation == 1:
+        result = first_number - second_number
+    elif calculation == 2:
+        result = first_number * second_number
+    elif calculation == 3:
+        result = first_number / second_number
+    
+        
+    return result
+
     
 
 
