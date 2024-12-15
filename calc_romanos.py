@@ -26,25 +26,41 @@ def ask_operation()->str:
     return user
 
 
-
-def calculatum()-> int:
+def calculation(first:int,second:int,operador)-> int:
+    """
+    Función que recibe un primer, un segudo número y calcula según el operador
+    No comprueba que las operaciones sean posibles
+    """
     result = 0
-    calculation = int(ask_operation())
-    first_number = input("Primer número:")
-    second_number = input("Segundo número:")
 
-    if calculation == 0:
-        result = first_number + second_number
-    elif calculation == 1:
-        result = first_number - second_number
-    elif calculation == 2:
-        result = first_number * second_number
-    elif calculation == 3:
-        result = first_number / second_number
-    
-        
+    if operador == 0:
+            result = first + second
+    elif operador == 1:
+            result = first - second
+    elif operador == 2:
+            result = first * second
+    elif operador == 3:
+            result = first / second
     return result
 
+def calculatum():
+   
+    is_exit = "S"
+    while is_exit == "S":
+        
+        
+        operador = int(ask_operation())
+        first_number = int(input("Primer número:"))
+        second_number = int(input("Segundo número:"))
+
+        print(calculation(first_number,second_number,operador))
+
+        is_exit = input("Otra S/N: ").upper()
+
+
+    
+        
+    
     
 
 
