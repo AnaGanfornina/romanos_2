@@ -1,3 +1,5 @@
+from fromanos import a_numeros
+
 def imprime_operadores():
     """
     Imprime las posibles operaciones matematicas por pantalla
@@ -41,3 +43,18 @@ def calculation(first:int,second:int,operador)-> int:
     elif operador == 3:
             result = first / second
     return result
+
+def imput_to_int(number:int)->int:
+    """
+    Determina si el numero de entrada es transformable en un entero, de no ser asi
+    es un número romano y lo traduce. Devuelve un número en ambos casos.
+    """
+    result = 0
+    try: 
+        result = int(number)
+       
+    except ValueError:
+        result = a_numeros(number)
+    
+    return result
+
