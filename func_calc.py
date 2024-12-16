@@ -1,4 +1,4 @@
-from fromanos import a_numeros
+from fromanos import a_numeros,RomanNumberError
 
 def imprime_operadores():
     """
@@ -58,3 +58,18 @@ def imput_to_int(number:int)->int:
     
     return result
 
+def is_valid(num:str)-> bool:
+    resutl = True
+    try:
+        imput_to_int(num)
+    except RomanNumberError:
+        resutl = False
+    return resutl
+
+def ask_input(text:str):
+    while True:
+        number = input(f"{text}")
+        if is_valid(number):
+            break
+        print("No es un número válido, vuelva a escribirlo")
+    return imput_to_int(number)
