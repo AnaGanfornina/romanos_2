@@ -174,14 +174,14 @@ def valida_repeticiones(num_roman:str)->bool:
     return en_racha,caracter,limit
     
 
-def program():
-    user_answer = input("Introduzca el número a traducir: ")
+def translator(number:int|str):
+    
     result = 0
     try: 
-        int(user_answer)
-        result = a_romanos(int(user_answer)) #esto es probable hacerlo con un try except
+        int(number)
+        result = a_romanos(int(number)) #esto es probable hacerlo con un try except
     except ValueError:
-        result = a_numeros(user_answer)
+        result = a_numeros(number)
     
     return result
 
