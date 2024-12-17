@@ -2,11 +2,6 @@
 from func_calc import ask_operation,calculation,imput_to_int,is_valid,ask_input
 from enum import Enum
 
-class Opeation(Enum):
-    SUMAR = "+"
-    RESTAR = "-"
-    MULTIPLICAR = "*"
-    DIVIDIR = "/"
 
 
 def to_print_result(first:int,operation:int,second:int):

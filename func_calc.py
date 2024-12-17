@@ -7,9 +7,11 @@ def imprime_operadores():
     print("CALCULATUM")
     print("==========")
     print("")
-    operadores = ("Sumar","Restar","Multiplicar","Dividir")
-    for i in range(4):  
-        print(f"{i}. {operadores[i]}")
+    operadores = ((1,"Sumar"),(2,"Restar"),(3,"Multiplicar"),(4,"Dividir"))
+
+    for operador in operadores: 
+
+        print(f"{operador[0]}. {operador[1]}")
     
 def ask_operation()->str:
     """
