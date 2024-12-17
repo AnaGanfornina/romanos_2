@@ -1,4 +1,4 @@
-
+from typing import Union
 
 class RomanNumberError(Exception):
     pass
@@ -185,4 +185,13 @@ def translator(number:int|str):
     
     return result
 
+
+class Roman_Number:
+    def __init__(self,number:Union[int|str]):
+        if type(number) == int:
+            self.value = number
+            self.representation = a_romanos(number)
+        else:
+            self.value = a_numeros(number)
+            self.representation = number
 
