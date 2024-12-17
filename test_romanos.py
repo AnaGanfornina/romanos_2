@@ -1,4 +1,4 @@
-from fromanos import a_romanos,descomponer,traducir,a_numeros,traduce_entero,is_valid,RomanNumberError,valida_repeticiones
+from fromanos import a_romanos,descomponer,traducir,a_numeros,traduce_entero,is_valid,RomanNumberError,valida_repeticiones,Roman_Number
 import pytest
 
 def _test_simbolos_sencillos():
@@ -42,8 +42,6 @@ def test_a_numeros():
     
     assert a_numeros("IV") == 4
     
-
-
 def test_traduce_entero():
     assert traduce_entero("IX") == 9
     assert traduce_entero("XXX") == 30
@@ -55,7 +53,6 @@ def test_traduce_entero():
     #with pytest.raises(ValueError):
         #traduce_entero("IIII")
 
-
 def test_is_valid():
     assert not is_valid("IIII")
     assert is_valid("III")
@@ -65,7 +62,6 @@ def test_num_validar_caractereres_romanos():
         a_numeros("ZTW")
     
     assert str(contexto.value).endswith("no es un simbolo romano") 
-
 
 def test_validar_no_repeticiones_de_3():
     """
@@ -85,7 +81,6 @@ def test_validar_no_repeticiones_de_2():
     assert valida_repeticiones ("LL") ==(False, "L",2)
     assert valida_repeticiones ("DD") == (False, "D",2)
 
-
 def test_valdar_romano_cuatro_repeticiones():
     with pytest.raises(RomanNumberError) as contexto:
         a_numeros("MCCCCXXII")
@@ -95,7 +90,6 @@ def test_valdar_romano_cuatro_repeticiones():
         a_numeros("MMMMCXXII")
     assert str(contexto.value) == "M, solo puede repetirse tres veces"
      
-
 def test_valdar_romano_sin_repeticiones():
     with pytest.raises(RomanNumberError) as ctx_error:
         a_numeros("MCCVV")
@@ -114,7 +108,6 @@ def test_no_restas_repetidas_del_mimso_grupo_valor():
     with pytest.raises(RomanNumberError):
         a_numeros("XCXL")
     
-
 def test_no_sumar_mismo_grupo_despues_de_resta():
     with pytest.raises(RomanNumberError):
         a_numeros("XCXXXIII")
@@ -126,3 +119,15 @@ def test_no_sumar_mismo_grupo_distinto_valor():
 def test_no_restas_contrapeadas():
     with pytest.raises(RomanNumberError):
         a_numeros("IXC")
+
+def test_constructor_entero_clase_Romano():
+    rn = Roman_Number(8)
+
+    assert rn.value == 8
+    assert rn.representation == "VIII"
+
+def test_consturctor_cadena_clase_Romana():
+    rn = Roman_Number("VIII")
+
+    assert rn.value == 8
+    assert rn.representation == "VIII"
