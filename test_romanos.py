@@ -155,3 +155,17 @@ def test_comparacion_menor_o_igual_que():
 def test_comparacion_distinto_que():
     
     assert Roman_Number(18) != Roman_Number("XV")
+
+#romano + romano
+    
+def test_romano_mas_romano():
+    assert Roman_Number("XV") + Roman_Number("V") == Roman_Number("XX")
+
+#romano + entero
+def test_romano_mas_int():
+    assert Roman_Number("XV") + Roman_Number(5) == Roman_Number("XX")
+#romano + otra cosa
+def test_romano_mas_otra_cosa():
+    with pytest.raises(TypeError):
+        Roman_Number("XV") + "lolailo"
+
