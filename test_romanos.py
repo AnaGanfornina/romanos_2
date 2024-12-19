@@ -136,3 +136,22 @@ def test_str_romanos():
     rn = Roman_Number(9)
     assert str(rn) == "IX"
 
+def test_comparacion_mayor_que():
+    
+    assert Roman_Number(19) > Roman_Number("XV")
+
+def test_comparacion_mayor_o_igual_que():
+    
+    assert Roman_Number(15) >= Roman_Number("XV")
+
+def test_comparacion_menor_que():
+    
+    assert Roman_Number(10) < Roman_Number("XV")
+
+def test_comparacion_menor_o_igual_que():
+    
+    assert Roman_Number(15) <= Roman_Number("XV")
+
+def test_comparacion_distinto_que():
+    
+    assert Roman_Number(18) != Roman_Number("XV")
