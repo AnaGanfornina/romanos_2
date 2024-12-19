@@ -131,3 +131,7 @@ def test_consturctor_cadena_clase_Romana():
 
     assert rn.value == 8
     assert rn.representation == "VIII"
+
+def test_str_romanos():
+    rn = Roman_Number(9)
+    assert str(rn) == "IX"
