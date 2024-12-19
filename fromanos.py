@@ -191,11 +191,22 @@ class Roman_Number:
         if type(number) == int:
             self.value = number
             self.representation = a_romanos(number)
-        else:
+        elif type(number) == str:
             self.value = a_numeros(number)
             self.representation = number
+        else:
+            raise RomanNumberError("Solo admitimos int o str")
+
+
     def __str__(self) -> str:
         return f"{self.representation}"
     
     def __repr__(self) -> str:
         return self.__str__()
+    
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other,self.__class__):
+            return False
+        return self.value == other.value
+    def __hash__(self) -> int:
+        return hash(self.value)
