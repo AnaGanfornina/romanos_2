@@ -204,6 +204,28 @@ class Roman_Number:
     def __repr__(self) -> str:
         return self.__str__()
     
+    def __add__(self, other:object):
+        """
+        1.Validar el tipo de other
+        2.Realizar suma
+        3.Devolver romano
+        """
+        """
+        if isinstance(other,int):
+            number_value = other
+        elif isinstance(other,self.__class__):
+            number_value = other.value
+        else:
+            raise TypeError(f" '+' not supported between instances of 'Roman_Number' and {other.__class__}")
+    
+
+        return  Roman_Number(self.value + number_value)
+        """
+        if not isinstance(other,int) and not isinstance(other,self.__class__):
+            raise TypeError(f" '+' not supported between instances of 'Roman_Number' and {other.__class__}")
+        
+        return Roman_Number(self.value + other.value)
+       
     def __eq__(self, other: object) -> bool:
         if not isinstance(other,self.__class__):
             return False
@@ -211,17 +233,19 @@ class Roman_Number:
     def __hash__(self) -> int:
         return hash(self.value)
     
-    def __lt__(self, other: object) -> bool:  # menor que
+    def __lt__(self, other: object) -> bool:  # menor que/  less than
         return self.value < other.value
     
-    def __le__(self,other: object) -> bool: # menor o igual
+    def __le__(self,other: object) -> bool: # menor o igual/ lesss or or equal than 
         return self.value <= other.value
     
-    def __gt__(self,other: object) -> bool: # mayor que
+    def __gt__(self,other: object) -> bool: # mayor que /greater than
         return self.value > other.value
     
-    def __ge__(self,other: object) -> bool: # mayor o igual
+    def __ge__(self,other: object) -> bool: # mayor o igual /greater or equal than
         return self.value >= other.value
 
-    def __ne__(self, other: object) -> bool: # distinto de 
+    def __ne__(self, other: object) -> bool: # distinto de /not  equal
         return self.value != other.value
+    
+#print(Roman_Number("XV") + Roman_Number(5)) 
