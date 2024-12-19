@@ -194,4 +194,8 @@ class Roman_Number:
         else:
             self.value = a_numeros(number)
             self.representation = number
-
+    def __str__(self) -> str:
+        return f"{self.representation}"
+    
+    def __repr__(self) -> str:
+        return self.__str__()
