@@ -210,3 +210,18 @@ class Roman_Number:
         return self.value == other.value
     def __hash__(self) -> int:
         return hash(self.value)
+    
+    def __lt__(self, other: object) -> bool:  # menor que
+        return self.value < other.value
+    
+    def __le__(self,other: object) -> bool: # menor o igual
+        return self.value <= other.value
+    
+    def __gt__(self,other: object) -> bool: # mayor que
+        return self.value > other.value
+    
+    def __ge__(self,other: object) -> bool: # mayor o igual
+        return self.value >= other.value
+
+    def __ne__(self, other: object) -> bool: # distinto de 
+        return self.value != other.value
