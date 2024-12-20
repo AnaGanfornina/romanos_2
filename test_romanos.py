@@ -161,11 +161,28 @@ def test_comparacion_distinto_que():
 def test_romano_mas_romano():
     assert Roman_Number("XV") + Roman_Number("V") == Roman_Number("XX")
 
-#romano + entero
-def test_romano_mas_int():
-    assert Roman_Number("XV") + Roman_Number(5) == Roman_Number("XX")
+#roman number 10 + roman number 9
+def test_num_mas_num():
+    assert Roman_Number(10) + Roman_Number(9) == Roman_Number(19)
+
+#romano + entero:
+def test_romano_mas_num():
+    assert Roman_Number(9) + 10 == Roman_Number(19)  
 #romano + otra cosa
 def test_romano_mas_otra_cosa():
     with pytest.raises(TypeError):
         Roman_Number("XV") + "lolailo"
+#entero + romano
+def test_suma_enteros_romanos():  
+    assert  5 + Roman_Number("XV") == Roman_Number("XX") #o Roman_Number(20)
 
+def test_resta():
+    assert Roman_Number("XV") - Roman_Number("V") == Roman_Number("X")
+    with pytest.raises(ValueError):
+     assert Roman_Number("V") - Roman_Number("XV") 
+    #assert str(error.value) == "There is no roman representation for the number {result}"
+     
+def test_resta_enteros_romanos():
+    assert 10 - Roman_Number("V") == Roman_Number("V") 
+    with pytest.raises(ValueError):
+     assert 5 - Roman_Number("XV") 
