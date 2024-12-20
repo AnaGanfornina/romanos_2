@@ -203,12 +203,26 @@ class Roman_Number:
     
     def __repr__(self) -> str:
         return self.__str__()
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other,self.__class__):
+            return False
+        return self.value == other.value
+    def __hash__(self) -> int:
+        return hash(self.value)
     
     def __add__(self, other:object):
         """
         1.Validar el tipo de other
         2.Realizar suma
         3.Devolver romano
+        """
+        """
+        #Método de calros
+        if not isinstance(other,int) and not isinstance(other,self.__class__):
+            raise TypeError(f" '+' not supported between instances of {self.__class__.__name__} and {other.__class__}")
+        
+        return Roman_Number(self.value + other.value)
         """
         
         if isinstance(other,int):
@@ -220,19 +234,59 @@ class Roman_Number:
     
         suma = self.value + number_value
         return  Roman_Number(suma)
-        """
-        if not isinstance(other,int) and not isinstance(other,self.__class__):
-            raise TypeError(f" '+' not supported between instances of {self.__class__.__name__} and {other.__class__}")
-        
-        return Roman_Number(self.value + other.value)
-        """
        
-    def __eq__(self, other: object) -> bool:
-        if not isinstance(other,self.__class__):
-            return False
-        return self.value == other.value
-    def __hash__(self) -> int:
-        return hash(self.value)
+    def __radd__(self, other: object): # Para trabajar con sumas inversas
+        return self.__add__(other)
+    
+    def __sub__(self, other: object): #Para restar
+        result = 0
+        
+        if isinstance(other, self.__class__):
+            result = self.value - other.value
+            if result < 0:
+                raise ValueError("There is no roman representation for the number {result}")
+        
+        elif isinstance(other,int):
+            result = self.value - other.value
+            if result < 0:
+                raise ValueError("There is no roman representation for the number {result}")
+        else:
+            raise TypeError(f" '-' not supported between instances of 'Roman_Number' and {other.__class__}")
+    
+        
+        return  Roman_Number(result)
+    
+    def __rsub__(self, other: object):
+        result = 0
+        
+        if isinstance(other, self.__class__):
+            result = other.value - self.value
+            if result < 0:
+                raise ValueError("There is no roman representation for the number {result}")
+        
+        if isinstance(other,int):
+            result = other - self.value 
+            if result < 0:
+                raise ValueError("There is no roman representation for the number {result}")
+        else:
+            raise TypeError(f" '-' not supported between instances of 'Roman_Number' and {other.__class__}")
+        
+        return  Roman_Number(result)
+    
+
+    def __mul__(self, other: object): # Para las multiplicaciones
+        pass
+    
+    def __truediv__(self, other: object): # División con decimales
+        pass
+
+    def __floordiv__(self, other: object): # División entera
+       pass
+
+    def __mod__(self, other: object): # Para calcular el resto
+        pass
+
+    
     
     def __lt__(self, other: object) -> bool:  # menor que/  less than
         return self.value < other.value
