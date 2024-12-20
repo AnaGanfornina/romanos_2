@@ -257,9 +257,10 @@ class Roman_Number:
         return  Roman_Number(result)
     
     def __rsub__(self, other: object):
+        """
         result = 0
         
-        if isinstance(other, self.__class__):
+        if isinstance(other, self.__class__):  #Este if podría ser reduncante porque ya comprobamos qeu es un Roman Number o no en el sub
             result = other.value - self.value
             if result < 0:
                 raise ValueError("There is no roman representation for the number {result}")
@@ -272,7 +273,15 @@ class Roman_Number:
             raise TypeError(f" '-' not supported between instances of 'Roman_Number' and {other.__class__}")
         
         return  Roman_Number(result)
-    
+        """
+        if isinstance(other,int):
+            number_value = other
+        else:
+            raise TypeError(f" '-' not supported between instances of 'Roman_Number' and {other.__class__}")
+        
+        roman_number_value = Roman_Number(number_value) #convertimos en un romano el int que nos llega de other
+        
+        return roman_number_value - self
 
     def __mul__(self, other: object): # Para las multiplicaciones
         pass
