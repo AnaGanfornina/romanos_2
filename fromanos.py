@@ -210,7 +210,7 @@ class Roman_Number:
         2.Realizar suma
         3.Devolver romano
         """
-        """
+        
         if isinstance(other,int):
             number_value = other
         elif isinstance(other,self.__class__):
@@ -218,13 +218,14 @@ class Roman_Number:
         else:
             raise TypeError(f" '+' not supported between instances of 'Roman_Number' and {other.__class__}")
     
-
-        return  Roman_Number(self.value + number_value)
+        suma = self.value + number_value
+        return  Roman_Number(suma)
         """
         if not isinstance(other,int) and not isinstance(other,self.__class__):
-            raise TypeError(f" '+' not supported between instances of 'Roman_Number' and {other.__class__}")
+            raise TypeError(f" '+' not supported between instances of {self.__class__.__name__} and {other.__class__}")
         
         return Roman_Number(self.value + other.value)
+        """
        
     def __eq__(self, other: object) -> bool:
         if not isinstance(other,self.__class__):
@@ -248,4 +249,3 @@ class Roman_Number:
     def __ne__(self, other: object) -> bool: # distinto de /not  equal
         return self.value != other.value
     
-#print(Roman_Number("XV") + Roman_Number(5)) 
