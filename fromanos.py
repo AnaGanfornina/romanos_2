@@ -284,17 +284,65 @@ class Roman_Number:
         return roman_number_value - self
 
     def __mul__(self, other: object): # Para las multiplicaciones
-        pass
+
+        if isinstance(other,int):
+            number_value = other
+        elif isinstance(other,self.__class__):
+            number_value = other.value
+        else:
+            raise TypeError(f" '*' not supported between instances of 'Roman_Number' and {other.__class__}")
+    
+        multiply = self.value * number_value
+        return  Roman_Number(multiply)
+    
+    def __rmul__(self, other: object): #Multiplicación inversa
+        return  self.__mul__(other)
     
     def __truediv__(self, other: object): # División con decimales
         pass
 
     def __floordiv__(self, other: object): # División entera
-       pass
+        if isinstance(other,int):
+            number_value = other
+        elif isinstance(other,self.__class__):
+            number_value = other.value
+        else:
+            raise TypeError(f" '//' not supported between instances of 'Roman_Number' and {other.__class__}")
+        division = self.value // number_value
+        return  Roman_Number(division)
+    
+    
+    def __rfloordiv__(self, other: object): # División entera inversa
+        if isinstance(other,int):
+            number_value = other
 
+        elif isinstance(other,self.__class__):
+            number_value = other.value
+        else:
+            raise TypeError(f" '//' not supported between instances of 'Roman_Number' and {other.__class__}")
+
+        return Roman_Number(number_value // self.value)
+    
     def __mod__(self, other: object): # Para calcular el resto
-        pass
-
+        if isinstance(other,int):
+            number_value = other
+        elif isinstance(other,self.__class__):
+            number_value = other.value
+        else:
+            raise TypeError(f" '%' not supported between instances of 'Roman_Number' and {other.__class__}")
+        
+        module = self.value % number_value
+        return Roman_Number(module)
+    def __rmod__(self, other: object): # Para calcular el resto inverso
+        if isinstance(other,int):
+            number_value = other
+        elif isinstance(other,self.__class__):
+            number_value = other.value
+        else:
+            raise TypeError(f" '%' not supported between instances of 'Roman_Number' and {other.__class__}")
+        
+        module = number_value % self.value
+        return Roman_Number(module)
     
     
     def __lt__(self, other: object) -> bool:  # menor que/  less than
