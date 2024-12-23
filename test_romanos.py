@@ -186,3 +186,21 @@ def test_resta_enteros_romanos():
     assert 10 - Roman_Number("V") == Roman_Number("V") 
     with pytest.raises(ValueError):
      assert 5 - Roman_Number("XV") 
+
+def test_multiply():
+    assert  Roman_Number("II") * Roman_Number("V") == Roman_Number("X") 
+    assert  Roman_Number("II") * 5 == Roman_Number("X") 
+    assert  2 * Roman_Number("V") == Roman_Number("X") 
+
+
+def test_division_entera():
+    assert Roman_Number("X") // Roman_Number("II") == Roman_Number("V") 
+    assert Roman_Number("X") // Roman_Number("III") == Roman_Number("III") 
+    assert Roman_Number("X") // 2 == Roman_Number("V") 
+    assert 5 // Roman_Number("II") == Roman_Number("II") 
+
+def test_division_resto():
+    #No tiene en cuenta los restos 0 pues el 0 no existe en RomanNumber
+    assert Roman_Number("X") % Roman_Number("III") == Roman_Number("I")
+    assert Roman_Number("XV") % 4 == Roman_Number("III")
+    assert 15 % Roman_Number("IV") == Roman_Number("III")
