@@ -16,25 +16,42 @@ def traducir(valor:int)-> str:
     return simbolos[valor]
 
 def a_romanos(number:int)->str:
-    #cadena = ""
+    
+    
     number_str = str(number) 
     reversed_number_str = number_str[::-1]
 
     i = 0
     lista = []
-    tripleta = [0,0,0]
+    tripleta_lista = ["0","0","0"]
+    tripleta = ""
+    num_completo = ""
+    nueva_lista = []
     
-    for index,item in enumerate(reversed_number_str):
-        tripleta[i] = item
+    for index,item in enumerate(reversed_number_str): #La idea es hacer una lista de listas con las tripletas
+        tripleta_lista[i] = item
         i += 1
         if i == 3:
-            lista.append(tripleta)
-            tripleta = [0,0,0]
+            lista.append(tripleta_lista)
+            tripleta_lista = ["0","0","0"]
             i = 0
         elif index == len(reversed_number_str)-1:
-            lista.append(tripleta)
+            lista.append(tripleta_lista)
 
-    print(lista)
+    #[['2', '3', '9'], ['7', '8', '3'], ['9', '4', '1'], ['4', '1', 0]]
+            
+    for index, item in enumerate(lista): #y aqui transformalra en una lista de strings donde cada item es una tripleta
+        tripleta = "".join(item[::-1])
+        nueva_lista.append(a_romano(tripleta)+ "*" * index )
+        #num_completo +=  "*" * index + a_romano(tripleta) 
+    
+        
+    num_completo = "".join(nueva_lista [::-1])
+
+      
+
+
+    return num_completo
 
     
 
