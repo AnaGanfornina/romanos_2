@@ -204,3 +204,6 @@ def test_division_resto():
     assert Roman_Number("X") % Roman_Number("III") == Roman_Number("I")
     assert Roman_Number("XV") % 4 == Roman_Number("III")
     assert 15 % Roman_Number("IV") == Roman_Number("III")
+
+def test_romanos_mayor_3999():
+    assert a_romanos(14149387932) == "XIV***CXLIX**CCCLXXXVII*CMXXXII"

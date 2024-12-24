@@ -15,8 +15,12 @@ def traducir(valor:int)-> str:
     }
     return simbolos[valor]
 
-
 def a_romanos(number:int)->str:
+    cadena = ""
+    number_str = str(number)
+    
+
+def a_romano(number:int)->str:
     lista_traducciones = []
     number_str = str(number)
     reves = number_str[::-1]
