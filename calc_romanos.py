@@ -2,6 +2,15 @@
 from func_calc import ask_operation,calculation,imput_to_int,is_valid,ask_input
 from enum import Enum
 
+"""
+class Operadores(Enum):
+    SUMA = "1"
+    RESTA = "2"
+    MULTIPLICACION = "3"
+    DIVISION = "4"
+"""
+
+
 
 
 def to_print_result(first:int,operation:int,second:int):
@@ -13,7 +22,7 @@ def to_print_result(first:int,operation:int,second:int):
 
 def calculatum():
 
-    result = None
+    
    
     other_operation = "S" 
     while other_operation == "S":
@@ -30,4 +39,4 @@ def calculatum():
 
 
 
-calculatum()
+#calculatum()

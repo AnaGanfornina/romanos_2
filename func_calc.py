@@ -1,4 +1,5 @@
 from fromanos import a_numeros,RomanNumberError
+#from calc_romanos import Operadores
 
 def imprime_operadores():
     """
@@ -7,11 +8,13 @@ def imprime_operadores():
     print("CALCULATUM")
     print("==========")
     print("")
-    operadores = ((1,"Sumar"),(2,"Restar"),(3,"Multiplicar"),(4,"Dividir"))
+    operadores = ((1,"Sumar","+"),(2,"Restar","-"),(3,"Multiplicar","*"),(4,"Dividir","/"))
 
     for operador in operadores: 
 
         print(f"{operador[0]}. {operador[1]}")
+
+    
     
 def ask_operation()->str:
     """
@@ -20,12 +23,15 @@ def ask_operation()->str:
     user = ""
     while True:
         imprime_operadores()
-        user = input("Elige una opción (0 al 3): ") #posteriormente habrá que cambiar del 1 al 4
-        opciones = "0123"
+        user = input("Elige una opción (1 al 4): ") 
+        opciones = "1234"
         if user in opciones:
             break
         print("Opción incorrecta")
         print("")
+
+    #user = Operadores.value
+    
     return user
 
 
