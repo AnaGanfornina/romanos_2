@@ -16,8 +16,26 @@ def traducir(valor:int)-> str:
     return simbolos[valor]
 
 def a_romanos(number:int)->str:
-    cadena = ""
-    number_str = str(number)
+    #cadena = ""
+    number_str = str(number) 
+    reversed_number_str = number_str[::-1]
+
+    i = 0
+    lista = []
+    tripleta = [0,0,0]
+    
+    for index,item in enumerate(reversed_number_str):
+        tripleta[i] = item
+        i += 1
+        if i == 3:
+            lista.append(tripleta)
+            tripleta = [0,0,0]
+            i = 0
+        elif index == len(reversed_number_str)-1:
+            lista.append(tripleta)
+
+    print(lista)
+
     
 
 def a_romano(number:int)->str:
