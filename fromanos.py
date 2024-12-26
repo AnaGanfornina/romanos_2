@@ -15,7 +15,26 @@ def traducir(valor:int)-> str:
     }
     return simbolos[valor]
 
+def escribe_asteriscos(lista)->list:
+    """
+    Función que recibe una lista de listas de strings y devuelve 
+    la lista transformada en una lista de strings donde cada item es una tripleta
+    De [['2', '3', '9'], ['7', '8', '3'], ['9', '4', '1'], ['4', '1', 0]] a
+    ['239','783','941','410']
+
+    Despues lo trasforma en romanos y le añade los astericos necesarios
+    """
+    nueva_lista = []
+    for index, item in enumerate(lista): #y aqui transformalra en una lista de strings donde cada item es una tripleta
+        tripleta = "".join(item[::-1])
+        nueva_lista.append(a_romano(tripleta)+ "*" * index )
+
+    return nueva_lista
+
 def a_romanos(number:int)->str:
+    """
+    Recibe un número entero y lo traduce a números romanos
+    """
     
     
     number_str = str(number) 
@@ -49,13 +68,8 @@ def a_romanos(number:int)->str:
                 lista.append(tripleta_lista)
 
    
-            
-    for index, item in enumerate(lista): #y aqui transformalra en una lista de strings donde cada item es una tripleta
-        tripleta = "".join(item[::-1])
-        nueva_lista.append(a_romano(tripleta)+ "*" * index )
-        
-    
-        
+    nueva_lista = escribe_asteriscos(lista)  
+     
     num_completo = "".join(nueva_lista [::-1])
 
       
