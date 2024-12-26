@@ -209,3 +209,5 @@ def test_romanos_mayor_3999():
     assert a_romanos(14149387932) == "XIV***CXLIX**CCCLXXXVII*CMXXXII"
     assert a_romanos(3149387932) == "MMMCXLIX**CCCLXXXVII*CMXXXII"
                                 
+def test_romanos_mayor_4000():
+    assert a_romanos(9005000221) == "IX***V**CCXXI"

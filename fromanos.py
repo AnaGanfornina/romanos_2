@@ -27,7 +27,12 @@ def escribe_asteriscos(lista)->list:
     nueva_lista = []
     for index, item in enumerate(lista): #y aqui transformalra en una lista de strings donde cada item es una tripleta
         tripleta = "".join(item[::-1])
-        nueva_lista.append(a_romano(tripleta)+ "*" * index )
+        roman = a_romano(tripleta) 
+        if roman != "":
+            roman += "*" * index 
+
+        nueva_lista.append(roman)
+
 
     return nueva_lista
 
