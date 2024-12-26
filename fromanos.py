@@ -29,21 +29,31 @@ def a_romanos(number:int)->str:
     nueva_lista = []
     
     for index,item in enumerate(reversed_number_str): #La idea es hacer una lista de listas con las tripletas
+                                                    #[['2', '3', '9'], ['7', '8', '3'], ['9', '4', '1'], ['4', '1', 0]]
         tripleta_lista[i] = item
         i += 1
         if i == 3:
             lista.append(tripleta_lista)
             tripleta_lista = ["0","0","0"]
             i = 0
-        elif index == len(reversed_number_str)-1:
-            lista.append(tripleta_lista)
+        
 
-    #[['2', '3', '9'], ['7', '8', '3'], ['9', '4', '1'], ['4', '1', 0]]
+        elif index == len(reversed_number_str)-1:
+            num_suelto = int("".join(tripleta_lista[::-1]))  
+            if num_suelto < 4:
+                num_suelto = str(num_suelto) #Lo vuelvo a convertir en string porque si no da fallo mas adelante al trasformar las tripletas en strings
+                lista[len(lista)-1].append(num_suelto)  #Aquí se añade el número suelto menor que 4 a la tripleta anterior  
+                                                        #[['2', '3', '9'], ['7', '8', '3'],[9, 4, 1, 3]]
+                
+            else:
+                lista.append(tripleta_lista)
+
+   
             
     for index, item in enumerate(lista): #y aqui transformalra en una lista de strings donde cada item es una tripleta
         tripleta = "".join(item[::-1])
         nueva_lista.append(a_romano(tripleta)+ "*" * index )
-        #num_completo +=  "*" * index + a_romano(tripleta) 
+        
     
         
     num_completo = "".join(nueva_lista [::-1])
