@@ -76,13 +76,7 @@ def a_romanos(number:int)->str:
     nueva_lista = escribe_asteriscos(lista)  
      
     num_completo = "".join(nueva_lista [::-1])
-
-      
-
-
     return num_completo
-
-    
 
 def a_romano(number:int)->str:
     lista_traducciones = []
@@ -149,7 +143,6 @@ def puede_sumar(valor:int,last:int)->bool:
     que la longitud de last
     """
     return len(str(valor)) < len(str(last))
-
 
 def a_numeros(simbolo:str)-> str:
     """
@@ -241,7 +234,6 @@ def valida_repeticiones(num_roman:str)->bool:
             
     return en_racha,caracter,limit
     
-
 def translator(number:int|str):
     
     result = 0
@@ -253,14 +245,13 @@ def translator(number:int|str):
     
     return result
 
-
 class Roman_Number:
     def __init__(self,number:Union[int|str]):
         if type(number) == int:
             self.value = number
-            self.representation = a_romanos(number)
+            self.representation = a_romano(number)
         elif type(number) == str:
-            self.value = a_numeros(number)
+            self.value = a_numeros(number) 
             self.representation = number
         else:
             raise RomanNumberError("Solo admitimos int o str")

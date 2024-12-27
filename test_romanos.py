@@ -1,4 +1,4 @@
-from fromanos import a_romanos,descomponer,traducir,a_numeros,traduce_entero,is_valid,RomanNumberError,valida_repeticiones,Roman_Number
+from fromanos import a_romanos,descomponer,traducir,a_numeros,traduce_entero,is_valid,RomanNumberError,valida_repeticiones,Roman_Number,a_romano
 import pytest
 
 def _test_simbolos_sencillos():
@@ -38,7 +38,8 @@ def test_a_numeros():
     assert a_numeros("MMMCMXCIX") == 3999
 
     for n in range(1,4000):
-        assert a_numeros(a_romanos(n)) == n
+        print(a_numeros(a_romano(n)) )
+        assert a_numeros(a_romano(n)) == n
     
     assert a_numeros("IV") == 4
     
