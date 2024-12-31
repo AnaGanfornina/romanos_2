@@ -1,4 +1,5 @@
-from fromanos import a_romanos,descomponer,traducir,a_numeros,traduce_entero,is_valid,RomanNumberError,valida_repeticiones,Roman_Number,a_romano
+from calculatum.roman_funciton import a_romanos,descomponer,traducir,a_numeros,traduce_entero,is_valid,valida_repeticiones,a_romano
+from calculatum.entities import Roman_Number, RomanNumberError
 import pytest
 
 def _test_simbolos_sencillos():

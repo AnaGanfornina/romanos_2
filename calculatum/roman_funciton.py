@@ -1,5 +1,6 @@
 from typing import Union
 
+
 class RomanNumberError(Exception):
     pass
 
